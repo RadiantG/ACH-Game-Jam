@@ -587,6 +587,7 @@ screen about():
             text _("Kyle J\n")
             text _("Playtesting")
             text _("theddon")
+            text _("Kyle J")
             text _("Radiant G\n")
 
             text _("Background art edited by Radiant G from Very foggy forest scene in Shenandoah National Park photograph by Taylor Wright. Used under free license via Unsplash.\n")

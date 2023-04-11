@@ -208,6 +208,8 @@ menu:
 
 
 label emerald_incorrect:
+if emerald_wrong_puzzle == False and emerald_wrong_fear == False:
+    n "The puzzle seems pretty sure everyone is afraid of something..."
 if emerald_wrong_puzzle != False or emerald_wrong_fear != False:
     $ mood = 3
     if emerald_wrong_puzzle != True or emerald_wrong_fear != True:
