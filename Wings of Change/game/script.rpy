@@ -124,7 +124,7 @@ menu:
 
 label amethyst_correct1:
     $ mood = 2
-    n "Yeah, that was right."
+    n "Yeah, that was right!"
     $ mood = 3
     n "I think I understand now. Because an angry dog bite would hurt a lot..."
     $ mood = 2
@@ -144,7 +144,7 @@ label amethyst_correct2:
     $ mood = 2
     n "Correct, nice job!"
     n "I think because an amethyst would shine in the sun, it had to be the puzzles."
-    n "Because the only reason we are doing this is to unlock the forest's secrets."
+    n "Because the only reason we're doing this is to unlock the forest's secrets."
     $ gem_color = 1
     show gem
     n "Wow! There it is!"
@@ -164,7 +164,7 @@ menu:
     "Try again":
         $ mood = 1
         jump amethyst_puzzle
-    "Try different puzzle":
+    "Try a different puzzle":
         $ mood = 1
         jump puzzles
 
@@ -182,12 +182,10 @@ menu:
         jump emerald_incorrect
 
 label emerald_correct1:
-    $ mood = 3
-    n "Opening up can be scary."
     $ mood = 2
-    n "But this time I think it helped us!"
+    n "Right. Because everyone's afraid of something!"
     $ mood = 1
-    n "Let's try doing that again with this last Emerald question."
+    n "Now for the last Emerald question."
 menu:
     n "What is your biggest obstacle right now?"
     "The puzzles." if emerald_wrong_puzzle == False:
@@ -210,7 +208,7 @@ menu:
     "Try again":
         $ mood = 1
         jump emerald_puzzle
-    "Try different puzzle":
+    "Try a different puzzle":
         $ mood = 1
         jump puzzles
 
@@ -344,7 +342,7 @@ menu:
     "Try again":
         $ mood = 1
         jump ruby_puzzle
-    "Try different puzzle":
+    "Try a different puzzle":
         $ mood = 1
         jump puzzles
 
