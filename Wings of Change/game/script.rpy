@@ -132,6 +132,7 @@ menu:
 label amethyst_correct1:
     $ mood = 2
     n "Yeah, that was right!"
+    $ mood = 1
     n "I think I understand now."
     $ mood = 3
     n "Because an angry dog bite would hurt a lot..."
