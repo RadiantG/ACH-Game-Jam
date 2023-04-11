@@ -399,7 +399,7 @@ label ending1:
     "Emerald."
     "Ruby."
     "The door glows and shakes, opening up."
-    "Tn front of you, all that is inside is a mirror."
+    "In front of you, all that is inside is a mirror."
     "..."
     "The answer was you all along."
 
@@ -507,8 +507,8 @@ label ending1:
                                                             n "Either way, we should get going."
                                                         "I wanted to see if there was something behind it.":
                                                             n "Was there?"
-                                                            label barkwall:
-                                                            "You look over at the shattered mirror and a thick tree trunk behind it."                                                          
+                                                            "You look over at the shattered mirror and a thick tree trunk behind it." 
+                                                            label barkwall:                                                         
                                                             menu:
                                                                 "You look over at the shattered mirror and a thick tree trunk behind it."
                                                                 "No.":
@@ -541,9 +541,9 @@ label ending1:
                                         
 
 label ending1_1:
-    "You have learened the true power is from within."
+    "You have learned the true power is from within."
     "Learned that even when it's hard, you can stand up for yourself."
-    "And most imprtantly, learned that all favorite desserts are valid."
+    "And most importantly, learned that all favorite desserts are valid."
     "You did it!"
     "Thank you for playing Wings of Change."
     
