@@ -16,6 +16,7 @@ default need = False
 default dont = False
 default done = False
 default give = False
+default no = 0
 
 define n = Character("Nico")
 
@@ -53,6 +54,10 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
+    "Welcome to Wings of Change."
+    "Note: This game does not have sound, but self-voicing assist can be toggled with the V button."
+    "The volume of it can be changed with SHIFT+A."
+
     show nico_character
 
     # These display lines of dialogue.
@@ -83,15 +88,17 @@ label start:
 
     $ mood = 1
     
-    n "We will need all three gems: amethyst, emerald, and ruby, to unlock the secret power of the woods."
+    n "We will need all three gems: amethyst, emerald, and ruby, to unlock the secret power of the forest."
 
 menu:
     n "Please! Will you help me?"
     "Yes! I will help you.":
         n "Thank you!"
         "There seems to be three riddles engraved in the trees. Which riddle would you like to solve first?"
+        "A beginner should start with the amethyst puzzle."
         jump puzzles
     "No. I'm just going to leave.":
+        call screen about
         jump end_game
 
 label puzzles:
@@ -143,15 +150,17 @@ menu:
 label amethyst_correct2: 
     $ mood = 2
     n "Correct, nice job!"
+    $ mood = 1
     n "I think because an amethyst would shine in the sun, it had to be the puzzles."
     n "Because the only reason we're doing this is to unlock the forest's secrets."
     $ gem_color = 1
     show gem
+    $ mood = 2
     n "Wow! There it is!"
-    $ mood = 1
-    n "Awesome job with that."
+    n "Awesome job with that!"
     $ amethyst = True
     "You earned an amethyst!"
+    $ mood = 1
     hide gem
     jump puzzles
 
@@ -199,10 +208,17 @@ menu:
 
 
 label emerald_incorrect:
-$ mood = 3  
-n "No.. The puzzle didn't like that."
-$ mood = 1
-n "I think we might need to open up to get this one right..."
+if emerald_wrong_puzzle != False or emerald_wrong_fear != False:
+    $ mood = 3
+    if emerald_wrong_puzzle != True or emerald_wrong_fear != True:
+        n "No.. The puzzle didn't like that."
+        $ mood = 1
+        n "I think we need to try again..."
+if emerald_wrong_puzzle == True and emerald_wrong_fear == True:
+    $ mood = 3
+    n "No.. The puzzle still didn't like that."
+    $ mood = 1
+    
 menu:
     "The puzzle reset."
     "Try again":
@@ -213,6 +229,7 @@ menu:
         jump puzzles
 
 label emerald_correct2:
+    n "So that's what it is..."
     $ mood = 2  
     n "Awesome!"
     n "I think here what we really needed was to show the courage to speak out against the puzzle!"
@@ -221,7 +238,9 @@ label emerald_correct2:
     $ gem_color = 2
     show gem
     $ emerald = True
+    $ mood = 2
     "You earned an emerald!"
+    $ mood = 1 
     hide gem
     jump puzzles
 
@@ -241,7 +260,9 @@ menu:
         jump ruby_correct1
 
 label ruby_correct1:
-    n "Huh... are they all right?"
+    n "No, I said it was- wait."
+    n "Huh...?"
+    n "Are they all correct?"
     $ mood = 3
     n "I feel cheated..."
     $ mood = 1
@@ -278,15 +299,18 @@ menu:
     n "Do you have the Emerald gem?"
     "If the trees have a vicious bite." if emerald == True:
         jump ruby_incorrect_alt
-    "If all favorite desserts are valid." if emerald == True:
-        n "I guess that's true. Every dessert is delicious."
-        n "But wait... if the last answer was wrong..."
-        n "That means... that wasn't the last question?"
-        n "Oh, c'mon..."
-        n "Another??"
-        jump ruby_correct3
     "If I have no fear." if emerald == True:
         jump ruby_incorrect_alt
+    "If all favorite desserts are valid." if emerald == True:
+        n "I guess that's true. Every dessert is delicious."
+        $ mood = 3
+        n "But wait... if the last answer was wrong..."
+        $ mood = 1
+        n "That means... that wasn't the last question?"
+        $ mood = 3
+        n "Oh, c'mon..."
+        $ mood = 1
+        jump ruby_correct3
     "If this is the last question." if emerald == True:
         jump ruby_incorrect_alt
     "If the trees have a vicious bite." if emerald == False:
@@ -324,6 +348,7 @@ menu:
     "Yes?" if fuck != True or how != True or need != True or dont != True or done != True or give != True:
         jump ruby_incorrect_alt
     "I'm just going to leave." if fuck != True or how != True or need != True or dont != True or done != True or give != True:
+        call screen about
         jump end_game
 
 label ruby_incorrect:
@@ -361,25 +386,236 @@ label ruby_correct4:
     $ ruby = True
     "You earned a ruby!"
     hide gem
-    "Suddenly a locked door appears to you."
+    "Suddenly, a locked door appears to you."
     "It has three holes in the shapes of your three gems."
     jump puzzles
     # This ends the game.
 
 label ending1:
-    "You open the door and it is a mirror."
+    "You walk up to the door and put in the gems one by one."
+    "Amethyst."
+    "Emerald."
+    "Ruby."
+    "The door glows and shakes, opening up."
+    "Tn front of you, all that is inside is a mirror."
+    "..."
     "The answer was you all along."
 
+    menu:
+        "The answer was you all along."
+        "The answer is... me?":
+            menu:
+                "The answer was you all along."
+                "Isn't that a little cliché?":
+                    label ending1_0:
+                    menu:
+                        "The answer was you all along."
+                        "Accept the ending as is." if no != 5:
+                            jump ending1_1
+                        "Do not accept it." if no != 5:
+                            $ no += 1
+                            jump ending1_0
+                        "Try something else." if no == 5:                        
+                            menu:
+                                "The answer was you all along."
+                                "Break the mirror.":
+                                    label mirror:
+                                    "You charge forward and break the mirror."                                    
+                                    scene black
+                                    "Everything goes dark."
+                                    n "What's going on?!"
+                                    n "Why did you do that?!"
+                                    n "I can't see!"
+                                    "You try to find Nico, but you can't feel anything."
+                                    $ no -= 1
+                                    "A voice booms that belongs to neither of you."
+                                    label final:
+                                    menu:
+                                        "{b}WHAT IS YOUR BIGGEST FEAR?{/b}"
+                                        "Being alone.":
+                                            scene forest
+                                            hide nico_character
+                                            show nico_character
+                                            jump puzzles
+                                        "Being incompetent.":
+                                            scene forest
+                                            hide nico_character
+                                            show nico_character
+                                            jump puzzles
+                                        "The dark.":
+                                            scene forest
+                                            hide nico_character
+                                            show nico_character
+                                            jump mirror
+                                        "Dying.":
+                                            scene forest
+                                            hide nico_character
+                                            show nico_character
+                                            jump ending1_0
+                                        "Losing a friend.":
+                                            scene forest
+                                            hide nico_character
+                                            show nico_character
+                                            jump puzzles
+                                        "Something that I won't say.":
+                                            jump final
+                                        "This.":
+                                            scene forest
+                                            hide nico_character
+                                            show nico_character
+                                            "Light refills the area, and Nico gets up dizzily after having fallen."
+                                            $ mood = 3
+                                            n "I am not sure what happened."
+                                            n "Are you okay?"
+                                            $ mood = 1
+                                            menu:
+                                                n "Are you okay?"
+                                                "I think so.":
+                                                    n "Okay, good."
+                                                    $ mood = 3
+                                                    n "But that was scary."
+                                                    $ mood = 1
+                                                    n "We should get out of here."
+                                                    n "Why did you break the mirror?"
+                                                    menu:
+                                                        n "Why did you break the mirror?"
+                                                        "I wanted to.":
+                                                            n "You wanted to?"
+                                                            $ mood = 3
+                                                            n "This is ancient magic."
+                                                            n "You put both of us in danger..."
+                                                            menu:
+                                                                n "You put both of us in danger..."
+                                                                "I'm sorry.":
+                                                                    n "I... need a little time to forgive you."
+                                                                    $ mood = 1
+                                                                    n "But I haven't forgot all of the good things either."
+                                                                    n "Let's stick together for now, and get out of here."
+                                                                "I'm not sorry.":
+                                                                    n "Then suit yourself."
+                                                                    hide nico_character
+                                                                    "You leave without Nico, walking out of the forest alone."
+                                                                    call screen about
+                                                                    jump end_game
+                                                        "I was frustrated.":
+                                                            $ mood = 3
+                                                            n "I am sorry that there wasn't more behind the door."
+                                                            n "I wonder how I would've reacted."
+                                                            $ mood = 1
+                                                            n "Either way, we should get going."
+                                                        "I wanted to see if there was something behind it.":
+                                                            n "Was there?"
+                                                            label barkwall:
+                                                            "You look over at the shattered mirror and a thick tree trunk behind it."                                                          
+                                                            menu:
+                                                                "You look over at the shattered mirror and a thick tree trunk behind it."
+                                                                "No.":
+                                                                    n "Well, I guess it was worth a shot."
+                                                                    n "But we should go."
+                                                                    jump ending_secret
+                                                                "I don't know.":
+                                                                    jump barkwall
+                                                        "Impulsive thought, and I acted on it.":
+                                                            $ mood = 3
+                                                            n "I know what you mean."
+                                                            $ mood = 1
+                                                            n "You helped me, I would be willing to help you too."
+                                                            n "Y'now... learn to control that."
+                                                            $ mood = 2
+                                                            n "All things aside, I am glad I met you."
+                                                            $ mood = 1
+                                                            n "Let's get out of here."
+                                                        "I don't know.":
+                                                            $ mood = 3
+                                                            n "I don't either..."
+                                                            $ mood = 1
+                                                            n "But either way, the magic here doesn't seem safe."
+                                                            n "We should go."
+                                                    jump ending_secret
+                                                        
+                                        "I have no fears.":
+                                            "Then you will not fear this."
+                                            jump end_game
+                                        
+
+label ending1_1:
+    "You have learened the true power is from within."
+    "Learned that even when it's hard, you can stand up for yourself."
+    "And most imprtantly, learned that all favorite desserts are valid."
+    "You did it!"
     "Thank you for playing Wings of Change."
-    "The end."
+    
+    call screen about
     jump end_game
 
+label ending_secret:
+    "You and Nico run out of the forest together."
+    "You unlocked the secret ending."
+
+    "Thank you for playing Wings of Change."
+    
+    call screen about
+    jump end_game
+
+
 label ending2:
-    "You walk away from everything and leave."
+    "You think back on everything that has happened."
+    "And you decide that don't need the secrets of the forest after all."
+    "Not after all of those trials and tricks."
+    menu:
+        "I can't do this. I just want to leave.":
+            n "Okay. You don't have to."
+        "Change your mind.":
+            jump puzzles
+
+    hide nico_character
+    "You decide to walk away from everything, and leave with your head held high."
+
+    "Thank you for playing Wings of Change."
+
+    call screen about
     jump end_game
 
 label ending3:
     "You give the gems to Nico and let him decide what to do."
+
+    $ mood = 2
+    n "Oh!"
+    n "Me?!"
+    $ mood = 3
+    n "Oh, wow..."
+    $ mood = 1
+    n "I can't thank you enough for all of the help you've given me."
+    n "I..."
+
+    "Nico walks up to the door and puts in the gems one by one."
+    "Amethyst."
+    "Emerald."
+    "Ruby."
+
+    "The door glows and shakes, opening up. Nico is looking in disbelief."
+    "There is no tunnel, or cave, or anything of the sort."
+    "Instead, Nico is looking face to face with... himself."
+    "It's a mirror."
+
+    "Nico reaches out and touches it gently with a talon."
+    n "That's me, huh?"
+    n "It's been awhile since I really looked at myself."
+    n "I..."
+    n "Is that it? The secret was inside us all along?"
+    n "Isn't that a little cliché?"
+
+    menu:
+        n "Isn't that a little cliché?"
+        "Sure. But the writers only had a few days to write this.":
+            n "That's fair. But also kind of nice."
+            n "Thank you, writers."
+            n "And thank you, player."
+            n "Both of you made choices that helped me take a step towards loving myself fully."
+
+    "Thank you for playing Wings of Change."
+    
+    call screen about
     jump end_game
 
 label end_game:

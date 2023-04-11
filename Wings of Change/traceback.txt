@@ -1,24 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 286, in script
-    menu:
-ValueError: unsupported format character 't' (0x74) at index 10
+  File "game/script.rpy", line 206, in script
+    if emerald_wrong_puzzle == False and if emerald_wrong_fear == False:
+SyntaxError: invalid syntax (game/script.rpy, line 206)
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 286, in script
-    menu:
-  File "C:\Program Files\renpy-8.0.3-sdk\renpy-8.0.3-sdk\renpy\ast.py", line 1903, in execute
-    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
-  File "C:\Program Files\renpy-8.0.3-sdk\renpy-8.0.3-sdk\renpy\exports.py", line 975, in menu
-    label = substitute(label)
-  File "C:\Program Files\renpy-8.0.3-sdk\renpy-8.0.3-sdk\renpy\exports.py", line 938, in substitute
-    return s % tag_quoting_dict
-ValueError: unsupported format character 't' (0x74) at index 10
+  File "game/script.rpy", line 206, in script
+    if emerald_wrong_puzzle == False and if emerald_wrong_fear == False:
+  File "C:\Program Files\renpy-8.0.3-sdk\renpy-8.0.3-sdk\renpy\ast.py", line 2115, in execute
+    if renpy.python.py_eval(condition):
+  File "C:\Program Files\renpy-8.0.3-sdk\renpy-8.0.3-sdk\renpy\python.py", line 1090, in py_eval
+    code = py_compile(code, 'eval')
+  File "C:\Program Files\renpy-8.0.3-sdk\renpy-8.0.3-sdk\renpy\python.py", line 1027, in py_compile
+    raise e
+  File "C:\Program Files\renpy-8.0.3-sdk\renpy-8.0.3-sdk\renpy\python.py", line 979, in py_compile
+    raise orig_e
+  File "C:\Program Files\renpy-8.0.3-sdk\renpy-8.0.3-sdk\renpy\python.py", line 972, in py_compile
+    tree = compile(source, filename, py_mode, ast.PyCF_ONLY_AST | flags, 1)
+SyntaxError: invalid syntax (game/script.rpy, line 206)
 
 Windows-10-10.0.22621 AMD64
 Ren'Py 8.0.3.22090809
 Wings of Change 1.0
-Thu Apr  6 15:57:13 2023
+Tue Apr 11 16:45:16 2023

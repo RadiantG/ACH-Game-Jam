@@ -317,7 +317,7 @@ screen navigation():
 
             textbutton _("Main Menu") action MainMenu()
 
-        textbutton _("About") action ShowMenu("about")
+        textbutton _("Credits") action ShowMenu("about")
 
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
@@ -559,6 +559,38 @@ screen about():
             if gui.about:
                 text "[gui.about!t]\n"
 
+            text _("Credits\n")
+            text _("Producer")
+            text _("Radiant G\n")
+            text _("Character Artist")
+            text _("Zachie\n")
+            text _("UI Artist")
+            text _("Kyle J\n")
+            text _("Gem Artist")
+            text _("theddon\n")
+            text _("Writing")
+            text _("Radiant G\n")
+            text _("Editing")
+            text _("theddon\n")
+            text _("Programming")
+            text _("Radiant G\n")
+            text _("Character Design")
+            text _("Zachie\n")
+            text _("Game Design")
+            text _("Radiant G")
+            text _("Kyle J")
+            text _("theddon\n")
+            text _("World Building")
+            text _("Zachie")
+            text _("Radiant G\n")
+            text _("Troubleshooting")
+            text _("Kyle J\n")
+            text _("Playtesting")
+            text _("theddon\n")
+            text _("Radiant G\n")
+
+            text _("Background art edited by Radiant G from Very foggy forest scene in Shenandoah National Park photograph by Taylor Wright. Used under free license via Unsplash.\n")
+
             text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
@@ -753,40 +785,40 @@ screen preferences():
 
                     bar value Preference("auto-forward time")
 
-                vbox:
-
-                    if config.has_music:
-                        label _("Music Volume")
-
-                        hbox:
-                            bar value Preference("music volume")
-
-                    if config.has_sound:
-
-                        label _("Sound Volume")
-
-                        hbox:
-                            bar value Preference("sound volume")
-
-                            if config.sample_sound:
-                                textbutton _("Test") action Play("sound", config.sample_sound)
-
-
-                    if config.has_voice:
-                        label _("Voice Volume")
-
-                        hbox:
-                            bar value Preference("voice volume")
-
-                            if config.sample_voice:
-                                textbutton _("Test") action Play("voice", config.sample_voice)
-
-                    if config.has_music or config.has_sound or config.has_voice:
-                        null height gui.pref_spacing
-
-                        textbutton _("Mute All"):
-                            action Preference("all mute", "toggle")
-                            style "mute_all_button"
+#                vbox:
+#
+#                    if config.has_music:
+#                        label _("Music Volume")
+#
+#                        hbox:
+#                            bar value Preference("music volume")
+#
+#                    if config.has_sound:
+#
+#                        label _("Sound Volume")
+#
+#                        hbox:
+#                            bar value Preference("sound volume")
+#
+#                            if config.sample_sound:
+#                                textbutton _("Test") action Play("sound", config.sample_sound)
+#
+#
+#                    if config.has_voice:
+#                        label _("Voice Volume")
+#
+#                        hbox:
+#                            bar value Preference("voice volume")
+#
+#                            if config.sample_voice:
+#                                textbutton _("Test") action Play("voice", config.sample_voice)
+#
+#                    if config.has_music or config.has_sound or config.has_voice:
+#                        null height gui.pref_spacing
+#
+#                        textbutton _("Mute All"):
+#                            action Preference("all mute", "toggle")
+ #                           style "mute_all_button"
 
 
 style pref_label is gui_label
