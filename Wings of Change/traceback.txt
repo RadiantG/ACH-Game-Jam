@@ -1,0 +1,24 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 286, in script
+    menu:
+ValueError: unsupported format character 't' (0x74) at index 10
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/script.rpy", line 286, in script
+    menu:
+  File "C:\Program Files\renpy-8.0.3-sdk\renpy-8.0.3-sdk\renpy\ast.py", line 1903, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "C:\Program Files\renpy-8.0.3-sdk\renpy-8.0.3-sdk\renpy\exports.py", line 975, in menu
+    label = substitute(label)
+  File "C:\Program Files\renpy-8.0.3-sdk\renpy-8.0.3-sdk\renpy\exports.py", line 938, in substitute
+    return s % tag_quoting_dict
+ValueError: unsupported format character 't' (0x74) at index 10
+
+Windows-10-10.0.22621 AMD64
+Ren'Py 8.0.3.22090809
+Wings of Change 1.0
+Thu Apr  6 15:57:13 2023
