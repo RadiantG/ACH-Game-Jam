@@ -190,7 +190,7 @@ menu:
     "Something that I won't say.":
         jump emerald_correct1
     "I have no fears.":
-        jump emerald_incorrect
+        jump emerald_incorrect_other
 
 label emerald_correct1:
     $ mood = 2
@@ -208,6 +208,19 @@ menu:
     "The fact this question is playing games with me." if emerald_wrong_puzzle == True and emerald_wrong_fear == True:
         jump emerald_correct2
 
+label emerald_incorrect_other:
+n "No.. The puzzle didn't like that."
+$ mood = 1
+n "I think we need to try again..."
+
+menu:
+    "The puzzle reset."
+    "Try again":
+        $ mood = 1
+        jump emerald_puzzle
+    "Try a different puzzle":
+        $ mood = 1
+        jump puzzles
 
 label emerald_incorrect:
 if emerald_wrong_puzzle == False and emerald_wrong_fear == False:
@@ -524,7 +537,7 @@ label ending1:
                                                             n "I know what you mean."
                                                             $ mood = 1
                                                             n "You helped me, I would be willing to help you too."
-                                                            n "Y'now... learn to control that."
+                                                            n "Y'know... learn to control that."
                                                             $ mood = 2
                                                             n "All things aside, I am glad I met you."
                                                             $ mood = 1
