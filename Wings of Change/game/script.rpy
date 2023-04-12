@@ -198,7 +198,7 @@ label emerald_correct1:
     $ mood = 1
     n "Now for the last Emerald question."
 menu:
-    n "What is your biggest obstacle right now?."
+    n "What is your biggest obstacle right now?"
     "The puzzles." if emerald_wrong_puzzle == False:
         $ emerald_wrong_puzzle = True
         jump emerald_incorrect
